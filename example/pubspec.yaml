@@ -1,6 +1,7 @@
 name: example
 description: Example app for flutter_easyform_builder package.
 version: 1.0.0+1
+publish_to: none
 
 environment:
   sdk: ^3.0.0
