@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:easy_forms/easy_forms.dart';
+import 'package:flutter_easy_forms/easy_forms.dart';
 
 void main() {
   runApp(const MyApp());
