@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_easy_forms/easy_forms.dart';
+import 'package:flutter_easyform_builder/easy_forms.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
 }
 
 class FormDemoPage extends StatefulWidget {
-  const FormDemoPage({Key? key}) : super(key: key);
+  const FormDemoPage({super.key});
 
   @override
   State<FormDemoPage> createState() => _FormDemoPageState();

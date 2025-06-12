@@ -54,7 +54,7 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_easy_forms:
+  flutter_easyform_builder:
     dependency: "direct main"
     description:
       path: ".."
