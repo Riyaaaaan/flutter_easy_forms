@@ -351,55 +351,44 @@ class _EasyFormFieldState extends State<EasyFormField> {
       decoration: InputDecoration(
         labelText: widget.label,
         hintText: widget.hintText ?? _getDefaultHint(),
-        prefixIcon:
-            _getPrefixIcon() != null
-                ? Padding(
-                  padding: widget.prefixIconPadding ?? EdgeInsets.zero,
-                  child: Icon(
-                    _getPrefixIcon(),
-                    color: widget.prefixIconColor,
-                    size: widget.iconSize,
-                  ),
-                )
-                : null,
-        suffixIcon:
-            widget.suffixIconPadding != null
-                ? Padding(
-                  padding: widget.suffixIconPadding!,
-                  child: _getSuffixIcon(),
-                )
-                : _getSuffixIcon(),
-        contentPadding:
-            widget.contentPadding ??
+        prefixIcon: _getPrefixIcon() != null
+            ? Padding(
+                padding: widget.prefixIconPadding ?? EdgeInsets.zero,
+                child: Icon(
+                  _getPrefixIcon(),
+                  color: widget.prefixIconColor,
+                  size: widget.iconSize,
+                ),
+              )
+            : null,
+        suffixIcon: widget.suffixIconPadding != null
+            ? Padding(
+                padding: widget.suffixIconPadding!,
+                child: _getSuffixIcon(),
+              )
+            : _getSuffixIcon(),
+        contentPadding: widget.contentPadding ??
             const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
 
         // Custom borders or default borders
         border: widget.border ?? _createBorder(),
         enabledBorder:
             widget.enabledBorder ?? _createBorder(color: widget.borderColor),
-        focusedBorder:
-            widget.focusedBorder ??
+        focusedBorder: widget.focusedBorder ??
             _createBorder(
-              color: widget.focusedBorderColor ?? Colors.blue,
-              width: widget.focusedBorderWidth ?? 2.0,
-            ),
-        errorBorder:
-            widget.errorBorder ??
+                color: widget.focusedBorderColor ?? Colors.blue,
+                width: widget.focusedBorderWidth ?? 2.0),
+        errorBorder: widget.errorBorder ??
             _createBorder(
-              color: widget.errorBorderColor ?? Colors.red,
-              width: widget.errorBorderWidth ?? 1.0,
-            ),
-        focusedErrorBorder:
-            widget.focusedErrorBorder ??
+                color: widget.errorBorderColor ?? Colors.red,
+                width: widget.errorBorderWidth ?? 1.0),
+        focusedErrorBorder: widget.focusedErrorBorder ??
             _createBorder(
-              color: widget.errorBorderColor ?? Colors.red,
-              width: widget.focusedBorderWidth ?? 2.0,
-            ),
-        disabledBorder:
-            widget.disabledBorder ??
+                color: widget.errorBorderColor ?? Colors.red,
+                width: widget.focusedBorderWidth ?? 2.0),
+        disabledBorder: widget.disabledBorder ??
             _createBorder(
-              color: widget.disabledBorderColor ?? Colors.grey.shade200,
-            ),
+                color: widget.disabledBorderColor ?? Colors.grey.shade200),
 
         filled: widget.filled,
         fillColor:
@@ -417,16 +406,15 @@ class _EasyFormFieldState extends State<EasyFormField> {
       textField = Container(
         decoration: BoxDecoration(
           borderRadius: _getBorderRadius(),
-          boxShadow:
-              widget.boxShadow ??
+          boxShadow: widget.boxShadow ??
               (widget.elevation != null
                   ? [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: widget.elevation!,
-                      offset: Offset(0, widget.elevation! / 2),
-                    ),
-                  ]
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: widget.elevation!,
+                        offset: Offset(0, widget.elevation! / 2),
+                      )
+                    ]
                   : null),
         ),
         child: textField,

@@ -1,4 +1,3 @@
-// main.dart - Complete example of using easy_forms in your app
 import 'package:flutter/material.dart';
 import 'package:easy_forms/easy_forms.dart';
 
@@ -7,77 +6,87 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'My App with Easy Forms',
-      theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
-      home: const RegistrationPage(),
+      title: 'Easy Forms Demo',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: const FormDemoPage(),
     );
   }
 }
 
-// Example 2: Complete Registration Form
-class RegistrationPage extends StatefulWidget {
-  const RegistrationPage({super.key});
+class FormDemoPage extends StatefulWidget {
+  const FormDemoPage({Key? key}) : super(key: key);
 
   @override
-  State<RegistrationPage> createState() => _RegistrationPageState();
+  State<FormDemoPage> createState() => _FormDemoPageState();
 }
 
-class _RegistrationPageState extends State<RegistrationPage> {
+class _FormDemoPageState extends State<FormDemoPage> {
   final _formKey = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _usernameController = TextEditingController();
+  final _dobController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Create Account')),
+      appBar: AppBar(title: const Text('Easy Forms Demo')),
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: ListView(
             children: [
               const Text(
-                'Join Us Today!',
+                'Registration Form',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 20),
 
-              // All different field types with minimal code
-              const EasyFormField(
-                label: 'First Name',
-                // fieldType defaults to FieldType.text
-              ),
+              // Text field (default)
+              const EasyFormField(label: 'Full Name'),
 
-              const EasyFormField(label: 'Last Name'),
-
-              const EasyFormField(
+              // Email field
+              EasyFormField(
                 label: 'Email Address',
                 fieldType: FieldType.email,
+                controller: _emailController,
               ),
 
-              const EasyFormField(
-                label: 'Username',
-                fieldType: FieldType.alphanum,
-                hintText: 'Letters and numbers only',
+              // Password field
+              EasyFormField(
+                label: 'Password',
+                fieldType: FieldType.password,
+                controller: _passwordController,
               ),
 
-              const EasyFormField(
+              // Number field
+              EasyFormField(
                 label: 'Phone Number',
                 fieldType: FieldType.number,
+                controller: _phoneController,
               ),
 
-              const EasyFormField(
-                label: 'Create Password',
-                fieldType: FieldType.password,
+              // Alphanumeric field
+              EasyFormField(
+                label: 'Username',
+                fieldType: FieldType.alphanum,
+                controller: _usernameController,
+                hintText: 'Only letters and numbers allowed',
               ),
 
+              // Date picker field
               EasyFormField(
                 label: 'Date of Birth',
                 fieldType: FieldType.datepicker,
+                controller: _dobController,
                 firstDate: DateTime(1900),
                 lastDate: DateTime.now(),
               ),
@@ -93,120 +102,15 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    Navigator.pop(context);
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Account created successfully!'),
-                        backgroundColor: Colors.green,
-                      ),
+                      const SnackBar(content: Text('Form is valid!')),
                     );
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                 ),
-                child: const Text('Create Account'),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-// Example 3: Advanced Usage with Custom Styling and Validation
-class ProfileEditPage extends StatefulWidget {
-  const ProfileEditPage({super.key});
-
-  @override
-  State<ProfileEditPage> createState() => _ProfileEditPageState();
-}
-
-class _ProfileEditPageState extends State<ProfileEditPage> {
-  final _formKey = GlobalKey<FormState>();
-  final _bioController = TextEditingController();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Edit Profile')),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Form(
-          key: _formKey,
-          child: ListView(
-            children: [
-              // Custom styling example
-              EasyFormField(
-                label: 'Display Name',
-                filled: true,
-                fillColor: Colors.grey[100],
-                prefixIcon: Icons.person,
-                onChanged: (value) {
-                  print('Name changed: $value');
-                },
-              ),
-
-              // Custom validation example
-              EasyFormField(
-                label: 'Website URL',
-                validator: (value) {
-                  if (value != null && value.isNotEmpty) {
-                    if (!value.startsWith('http://') &&
-                        !value.startsWith('https://')) {
-                      return 'URL must start with http:// or https://';
-                    }
-                  }
-                  return null;
-                },
-                required: false,
-                prefixIcon: Icons.link,
-              ),
-
-              // Multi-line text field
-              EasyFormField(
-                label: 'Bio',
-                controller: _bioController,
-                maxLines: 4,
-                hintText: 'Tell us about yourself...',
-                textInputAction: TextInputAction.newline,
-              ),
-
-              // Number field with custom validation
-              EasyFormField(
-                label: 'Age',
-                fieldType: FieldType.number,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Age is required';
-                  }
-                  final age = int.tryParse(value);
-                  if (age == null || age < 13 || age > 120) {
-                    return 'Please enter a valid age (13-120)';
-                  }
-                  return null;
-                },
-              ),
-
-              const SizedBox(height: 30),
-
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    Navigator.pop(context);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Profile updated!'),
-                        backgroundColor: Colors.green,
-                      ),
-                    );
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 15),
-                ),
-                child: const Text('Update Profile'),
+                child: const Text('Submit Form'),
               ),
             ],
           ),
@@ -217,7 +121,12 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
 
   @override
   void dispose() {
-    _bioController.dispose();
+    _nameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _phoneController.dispose();
+    _usernameController.dispose();
+    _dobController.dispose();
     super.dispose();
   }
 }

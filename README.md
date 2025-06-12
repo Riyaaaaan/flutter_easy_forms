@@ -1,70 +1,125 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Easy Forms
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
-
-A Flutter package for creating forms with minimal code. Easy Forms provides a simple yet powerful way to create forms in your Flutter applications with built-in validation and ready-to-use form fields.
+A Flutter package that simplifies form creation with ready-to-use form fields. Create beautiful forms with minimal code!
 
 ## Features
 
-- Simple and intuitive API
-- Built-in validation
-- Support for various field types:
-  - Text
-  - Email
-  - Password
-  - Numbers
-  - Alphanumeric
-  - Date picker
-- Customizable styling
-- Form field validation
-- Optional fields support
+- **Multiple Field Types**: text, alphanum, number, email, password, datepicker
+- **Built-in Validation**: Each field type comes with appropriate validation
+- **Minimal Code**: Create forms with just one line per field
+- **Customizable**: Extensive customization options available
+- **Ready to Use**: Import and start using immediately
 
-## Getting started
+## Installation
 
 Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  easy_forms: ^0.0.1
+  easy_forms: ^1.0.0
 ```
 
-## Usage
+Then run:
+
+```bash
+flutter pub get
+```
+
+## Quick Start
 
 ```dart
 import 'package:flutter/material.dart';
 import 'package:easy_forms/easy_forms.dart';
 
-// Create a simple form field
-const EasyFormField(
-  label: 'Email',
-  fieldType: FieldType.email,
-);
+class MyForm extends StatelessWidget {
+  final _formKey = GlobalKey<FormState>();
 
-// Create a password field with validation
-const EasyFormField(
-  label: 'Password',
-  fieldType: FieldType.password,
-);
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          // Text field (default)
+          EasyFormField(label: 'Name'),
 
-// Create an optional field
-const EasyFormField(
-  label: 'Phone Number (Optional)',
-  fieldType: FieldType.number,
-  required: false,
-);
+          // Email field with validation
+          EasyFormField(
+            label: 'Email',
+            fieldType: FieldType.email,
+          ),
+
+          // Password field with hide/show
+          EasyFormField(
+            label: 'Password',
+            fieldType: FieldType.password,
+          ),
+
+          // Number field
+          EasyFormField(
+            label: 'Phone',
+            fieldType: FieldType.number,
+          ),
+
+          // Alphanumeric field
+          EasyFormField(
+            label: 'Username',
+            fieldType: FieldType.alphanum,
+          ),
+
+          // Date picker
+          EasyFormField(
+            label: 'Date of Birth',
+            fieldType: FieldType.datepicker,
+          ),
+        ],
+      ),
+    );
+  }
+}
 ```
 
-See the `example` directory for a complete sample application.
+## Field Types
 
-## Additional information
+| Type                   | Description               | Validation                |
+| ---------------------- | ------------------------- | ------------------------- |
+| `FieldType.text`       | Default text input        | Required field validation |
+| `FieldType.alphanum`   | Letters and numbers only  | Alphanumeric validation   |
+| `FieldType.number`     | Numeric input             | Number validation         |
+| `FieldType.email`      | Email input with keyboard | Email format validation   |
+| `FieldType.password`   | Password with hide/show   | Minimum length validation |
+| `FieldType.datepicker` | Date selection            | Date selection validation |
 
-For more examples and usage information, please visit the example directory in the package repository. This package provides a comprehensive solution for creating forms in Flutter with minimal code while maintaining flexibility and customization options.
+## Customization
+
+```dart
+EasyFormField(
+  label: 'Custom Field',
+  fieldType: FieldType.email,
+  hintText: 'Custom hint text',
+  required: false,
+  prefixIcon: Icons.person,
+  filled: true,
+  fillColor: Colors.grey[100],
+  onChanged: (value) => print('Changed: $value'),
+  validator: (value) => value?.isEmpty ?? true ? 'Required!' : null,
+)
+```
+
+## Properties
+
+- `label`: Field label (required)
+- `fieldType`: Type of field (defaults to text)
+- `controller`: TextEditingController
+- `validator`: Custom validation function
+- `hintText`: Placeholder text
+- `required`: Whether field is required (default: true)
+- `prefixIcon` & `suffixIcon`: Icons
+- `onChanged`: Callback for value changes
+- `enabled`: Enable/disable field
+- `filled`: Fill background
+- `fillColor`: Background color
+
+## License
+
+MIT License

@@ -1,8 +1,8 @@
-name: easy_forms
+name: flutter_easy_forms
 description: "A Flutter package for creating beautiful forms with minimal code. Supports various field types (text, email, password, number, alphanum, datepicker) with built-in validation and extensive customization options."
 version: 0.0.1
-homepage: https://github.com/Riyaaaaan/easy_forms
-repository: https://github.com/Riyaaaaan/easy_forms
+homepage: https://github.com/Riyaaaaan/flutter_easy_forms
+repository: https://github.com/Riyaaaaan/flutter_easy_forms
 
 environment:
   sdk: ^3.0.0
